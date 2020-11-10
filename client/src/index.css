@@ -7,12 +7,6 @@
   font-family: 'Roboto', sans-serif;
 }
 
-@media(max-width: 420px) {
-  * {
-    font-size: 12px;
-  } 
-}
-
 li {
   list-style: none;
 }
@@ -20,4 +14,8 @@ li {
 a {
   text-decoration: none;
   color: black;
+}
+
+html, body, #root {
+  height: 100%;
 }
