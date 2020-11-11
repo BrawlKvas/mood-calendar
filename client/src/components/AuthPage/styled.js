@@ -1,15 +1,11 @@
 import styled from 'styled-components'
-import { Form, Field } from 'formik';
+import { Form, Field, ErrorMessage } from 'formik';
 
 export const PageWrapper = styled.div`
   position: relative;
   overflow: hidden;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
 `
 
 const Circle = styled.div`
@@ -40,18 +36,20 @@ export const RightCircle = styled(Circle)`
 `
 
 export const FormCustom = styled(Form)`
-  width: 85%;
-  margin-bottom: 60px;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 export const FormPanel = styled.div`
-  margin-bottom: 40px;
+  width: 85%;
   padding: 40px 20px;
   display: flex;
   flex-direction: column;
-  border: 1px solid #F0F0F0;
+  border: 1px solid ${props => props.error ? "red" : "#F0F0F0"} ;
   border-radius: 6px;
   background-color: #fff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -62,6 +60,7 @@ export const FieldCustom = styled(Field)`
   border: none;
   border-bottom: 2px solid #727272;
   outline: none;
+  font-size: 16px;
 
   :not(:first-child) {
     margin-top: 25px;
@@ -71,14 +70,25 @@ export const FieldCustom = styled(Field)`
 export const ButtonSubmit = styled.button`
   width: 50%;
   margin: 0 auto;
+  margin-top: 25px;
   padding: 10px 20px;
   font-size: 16px;
   border: none;
   border-radius: 20px;
   background-color: #EDD834;
+  outline: none;
   cursor: pointer;
 
-  :not(:last-child) {
-    margin-bottom: 20px;
+  :hover {
+    background-color: #EDD034;
   }
+`
+
+export const FormStatus = styled.div`
+  margin-top: 10px;
+`
+
+export const ErrorMessageCustom = styled(ErrorMessage)`
+  font-size: 12px;
+  color: red;
 `

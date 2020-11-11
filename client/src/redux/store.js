@@ -1,9 +1,15 @@
-import authReducer from "./authReducer";
+import thunk from 'redux-thunk'
+import { createStore, combineReducers, applyMiddleware } from "redux"
 
-const { createStore, combineReducers } = require("redux");
+import authReducer from "./authReducer"
 
-const reducers = combineReducers({ authReducer });
+const store = createStore(
+  combineReducers({
+    auth: authReducer
+  }),
+  applyMiddleware(thunk)
+)
 
-const store = createStore(reducers);
+export default store
 
-export default store;
+window.store = store

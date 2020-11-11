@@ -1,5 +1,5 @@
 {
   "port": 5000,
-  "mongoUri": "",
+  "mongoUri": "mongodb+srv://pukki:asdf1234@cluster0.zvxwv.mongodb.net/app?retryWrites=true&w=majority",
   "jwtSecret": "js is top"
 }
