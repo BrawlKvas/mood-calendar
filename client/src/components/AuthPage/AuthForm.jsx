@@ -10,11 +10,11 @@ const SIGN_UP = 'SIGN_UP' // Регистрация
 
 const AuthForm = ({ singIn, singUp }) => {
 
-  const submitHandler = (values, { setStatus }) => {
+  const submitHandler = (values, { setStatus, setSubmitting }) => {
     if (values.mode === SIGN_IN) {
-      singIn(values, setStatus)
+      singIn(values, setStatus, setSubmitting)
     } else if (values.mode === SIGN_UP) {
-      singUp(values, setStatus)
+      singUp(values, setStatus, setSubmitting)
     }
   }
 
@@ -35,7 +35,7 @@ const AuthForm = ({ singIn, singUp }) => {
       }}
     >
 
-      {({ errors, status, setFieldValue }) => (
+      {({ errors, status, isSubmitting, setFieldValue }) => (
         <FormCustom>
           <FormPanel error={status && status.error}>
             <FieldCustom type="text" placeholder="Логин" name="login" />
@@ -45,11 +45,11 @@ const AuthForm = ({ singIn, singUp }) => {
             <ErrorMessageCustom name="password" component="div" />
           </FormPanel>
 
-          <ButtonSubmit type="submit" onClick={() => { setFieldValue('mode', SIGN_IN, false) }}>
+          <ButtonSubmit type="submit" onClick={() => { setFieldValue('mode', SIGN_IN, false) }} disabled={isSubmitting}>
             Войти
           </ButtonSubmit>
 
-          <ButtonSubmit type="submit" onClick={() => { setFieldValue('mode', SIGN_UP, false) }}>
+          <ButtonSubmit type="submit" onClick={() => { setFieldValue('mode', SIGN_UP, false) }} disabled={isSubmitting}>
             Регистрация
           </ButtonSubmit>
 

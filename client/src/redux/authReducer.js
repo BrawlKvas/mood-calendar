@@ -1,8 +1,8 @@
 import { AuthAPI } from "../api/api"
 
-const SET_AUTH_DATA = 'SET_AUTH_DATA'
-const REMOVE_AUTH_DATA = 'REMOVE_AUTH_DATA'
-const TOKEN_STORAGE_KEY = 'TOKEN_STORAGE_KEY'
+const SET_AUTH_DATA = 'auth/SET_AUTH_DATA'
+const REMOVE_AUTH_DATA = 'auth/REMOVE_AUTH_DATA'
+const TOKEN_STORAGE_KEY = 'auth/TOKEN_STORAGE_KEY'
 
 const localToken = localStorage.getItem(TOKEN_STORAGE_KEY)
 const initState = {
@@ -36,33 +36,27 @@ export default authReducer
 const setAuthData = (data) => ({ type: SET_AUTH_DATA, data })
 const removeAuthData = () => ({ type: REMOVE_AUTH_DATA })
 
-export const singIn = ({ login, password }, setStatus) => (dispatch) => {
+export const singIn = ({ login, password }, setStatus, setSubmitting) => (dispatch) => {
   AuthAPI.signIn(login, password)
     .then(data => {
       dispatch(setAuthData(data))
       localStorage.setItem(TOKEN_STORAGE_KEY, data.token)
     })
     .catch(err => {
-      if (err.status === 500) {
-        setStatus({ error: "Сервер не отвечает" })
-      } else {
-        setStatus({ error: err.data.message })
-      }
+      setStatus({ error: err.data.message })
     })
+    .finally(() => setSubmitting(false))
 }
 
-export const singUp = ({ login, password }, setStatus) => (dispatch) => {
+export const singUp = ({ login, password }, setStatus, setSubmitting) => (dispatch) => {
   AuthAPI.signUp(login, password)
     .then(data => {
       setStatus({ message: data.message })
     })
     .catch(err => {
-      if (err.status === 500) {
-        setStatus({ error: "Сервер не отвечает" })
-      } else {
-        setStatus({ error: err.data.message })
-      }
+      setStatus({ error: err.data.message })
     })
+    .finally(() => setSubmitting(false))
 }
 
 export const signOut = () => (dispatch) => {

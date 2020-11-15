@@ -82,6 +82,10 @@ export const ButtonSubmit = styled.button`
   :hover {
     background-color: #EDD034;
   }
+
+  :disabled {
+    background-color: #b2bec3;
+  }
 `
 
 export const FormStatus = styled.div`
