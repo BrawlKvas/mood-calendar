@@ -1,13 +1,13 @@
-const { Router } = require('express');
-const router = Router();
-const bcrypt = require('bcryptjs');
-const { check, validationResult } = require('express-validator');
-const jwt = require('jsonwebtoken');
-const config = require('config');
+const { Router } = require('express')
+const router = Router()
+const bcrypt = require('bcryptjs')
+const { check, validationResult } = require('express-validator')
+const jwt = require('jsonwebtoken')
+const config = require('config')
 
-const User = require('./../models/User');
+const User = require('./../models/User')
 
-const upload = require('multer')();
+const upload = require('multer')()
 
 router.post(
   '/reg',
@@ -19,30 +19,30 @@ router.post(
   async (req, res) => {
     try {
 
-      const errors = validationResult(req);
+      const errors = validationResult(req)
 
       if (!errors.isEmpty()) {
-        res.status(400).json({ errors: errors.array(), message: 'Некоректные данные при регистрации' });
+        res.status(400).json({ errors: errors.array(), message: 'Некоректные данные при регистрации' })
       }
 
-      const { login, password } = req.body;
+      const { login, password } = req.body
 
-      const candidate = await User.findOne({ login });
+      const candidate = await User.findOne({ login })
 
       if (candidate) {
-        res.status(400).json({ message: 'Такой пользователь уже существует' });
+        res.status(400).json({ message: 'Такой пользователь уже существует' })
       }
-      const hashedPassword = bcrypt.hashSync(password, 8);
+      const hashedPassword = bcrypt.hashSync(password, 8)
 
-      const user = new User({ login, password: hashedPassword });
+      const user = new User({ login, password: hashedPassword })
 
-      await user.save();
+      await user.save()
 
-      res.status(201).json({ message: 'Пользователь создан' });
+      res.status(201).json({ message: 'Пользователь создан' })
 
     } catch (e) {
 
-      res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' });
+      res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
 
     }
   })
@@ -57,24 +57,24 @@ router.post(
   async (req, res) => {
     try {
 
-      const errors = validationResult(req);
+      const errors = validationResult(req)
 
       if (!errors.isEmpty()) {
-        res.status(400).json({ errors: errors.array(), message: 'Некоректные данные при регистрации' });
+        res.status(400).json({ errors: errors.array(), message: 'Некоректные данные при регистрации' })
       }
 
-      const { login, password } = req.body;
+      const { login, password } = req.body
 
-      const user = await User.findOne({ login });
+      const user = await User.findOne({ login })
 
       if (!user) {
-        res.status(400).json({ message: 'Неверный логин или пароль' });
+        res.status(400).json({ message: 'Неверный логин или пароль' })
       }
 
-      const isMatch = bcrypt.compareSync(password, user.password);
+      const isMatch = bcrypt.compareSync(password, user.password)
 
       if (!isMatch) {
-        res.status(400).json({ message: 'Неверный логин или пароль' });
+        res.status(400).json({ message: 'Неверный логин или пароль' })
       }
 
       const token = jwt.sign(
@@ -83,14 +83,14 @@ router.post(
         { expiresIn: '1h' }
       );
 
-      res.json({ token, userId: user.id });
+      res.json({ token, userId: user.id })
 
 
     } catch (e) {
 
-      res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' });
+      res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
 
     }
   })
 
-module.exports = router;
+module.exports = router
