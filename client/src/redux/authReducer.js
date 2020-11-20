@@ -2,7 +2,8 @@ import { AuthAPI } from "../api/api"
 
 const SET_AUTH_DATA = 'auth/SET_AUTH_DATA'
 const REMOVE_AUTH_DATA = 'auth/REMOVE_AUTH_DATA'
-const TOKEN_STORAGE_KEY = 'auth/TOKEN_STORAGE_KEY'
+
+export const TOKEN_STORAGE_KEY = 'auth/TOKEN_STORAGE_KEY'
 
 const localToken = localStorage.getItem(TOKEN_STORAGE_KEY)
 const initState = {
@@ -39,8 +40,8 @@ const removeAuthData = () => ({ type: REMOVE_AUTH_DATA })
 export const singIn = ({ login, password }, setStatus, setSubmitting) => (dispatch) => {
   AuthAPI.signIn(login, password)
     .then(data => {
-      dispatch(setAuthData(data))
       localStorage.setItem(TOKEN_STORAGE_KEY, data.token)
+      dispatch(setAuthData(data))
     })
     .catch(err => {
       setStatus({ error: err.data.message })

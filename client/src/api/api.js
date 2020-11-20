@@ -13,3 +13,20 @@ export const AuthAPI = {
       .catch(err => { throw err.response })
   }
 }
+
+export const CalendarAPI = {
+  getMonth: (year, month) => {
+    const token = localStorage.getItem('auth/TOKEN_STORAGE_KEY') // DEV
+
+    return axios.get(`/api/month/${year}&${month}`, {
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    })
+      .then(res => res.data)
+  },
+
+  setMoodDay: (year, month, day) => {
+    //TODO
+  }
+}

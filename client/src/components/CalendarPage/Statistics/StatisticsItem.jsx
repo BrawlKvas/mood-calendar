@@ -1,5 +1,5 @@
 import React from 'react'
-import withMoodColor from '../../hoc/withMoodColor'
+import withMoodColor from '../../../hoc/withMoodColor'
 import { ItemLine, ItemWrapper } from './styled';
 
 const StatisticsItem = ({ count, moodColor }) => {

@@ -5,6 +5,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+  font-size: 14px;
 }
 
 li {
@@ -18,4 +19,8 @@ a {
 
 html, body, #root {
   height: 100%;
+}
+
+button {
+  cursor: pointer;
 }
