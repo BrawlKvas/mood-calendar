@@ -5,8 +5,8 @@ import { Block, Choice, Title, Blackout } from './styled'
 const moods = ['Ужасное', 'Плохое', 'Нормальное', 'Отличное', 'Просто супер']
 const monthName = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
 
-const ChooseMood = ({ year, month, day, moodDay, closeEdit, setMoodDay }) => {
-
+const ChooseMood = ({ year, month, day, moodDay, closeEdit, setMoodDay }) => { //TODO Переделать на localstate
+  
   const clickHandler = (e) => {
     if (e.target === e.currentTarget) {
       closeEdit()
@@ -22,7 +22,7 @@ const ChooseMood = ({ year, month, day, moodDay, closeEdit, setMoodDay }) => {
         {
           moods.map((item, i) => (
             <Choice key={i}>
-              <RadioCircle mood={i} isPicked={i === moodDay} onClick={() => { setMoodDay(day, i) }} />
+              <RadioCircle mood={i} isPicked={i === moodDay} onClick={() => { setMoodDay(year, month, day, i) }} />
               {item}
             </Choice>
           ))
