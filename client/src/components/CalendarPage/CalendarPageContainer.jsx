@@ -9,6 +9,11 @@ class CalendarPageContainer extends Component {
     this.props.requestDays(this.props.year, this.props.month)
   }
 
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.year !== this.props.year || prevProps.month !== this.props.month)
+      this.props.requestDays(this.props.year, this.props.month)
+  }
+
   render() {
     if (!this.props.days)
       return <div>Loading...</div> //DEV

@@ -7,8 +7,8 @@ const SET_DAYS = 'calendar/SET_DAYS'
 const SET_DAY = 'calendar/SET_DAY'
 
 const initState = {
-  year: 2020,
-  month: 11,
+  year: new Date().getFullYear(),
+  month: new Date().getMonth() + 1,
 
   days: null
 }

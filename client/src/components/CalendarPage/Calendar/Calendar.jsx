@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { connect } from 'react-redux'
 import ChooseMood from './ChooseMood/ChooseMood'
 import CalendarGrid from './CalendarGrid'
-// import SelectDate from './SelectDate/SelectDate'
+import SelectDate from './SelectDate/SelectDate'
 import { Wrapper } from './styled'
 import { setMoodDay } from './../../../redux/calendarReducer'
 
@@ -22,7 +22,7 @@ const Calendar = ({ year, month, days, setMoodDay }) => {
   return (
     <Wrapper>
 
-      {/* <SelectDate year={year} month={month} /> */}
+      <SelectDate year={year} month={month} />
 
       <CalendarGrid days={days} openEdit={openEdit} />
 
