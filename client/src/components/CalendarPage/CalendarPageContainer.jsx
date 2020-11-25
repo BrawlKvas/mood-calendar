@@ -3,10 +3,11 @@ import { connect } from 'react-redux'
 import CalendarPage from './CalendarPage'
 import { requestDays } from './../../redux/calendarReducer'
 import { signOut } from './../../redux/authReducer'
+import Preloader, { WrapperPreloader } from '../common/Preloader'
 
 class CalendarPageContainer extends Component {
   componentDidMount = () => {
-    this.props.requestDays(this.props.year, this.props.month)
+    this.props.requestDays()
   }
 
   componentDidUpdate = (prevProps) => {
@@ -15,11 +16,15 @@ class CalendarPageContainer extends Component {
   }
 
   render() {
-    if (!this.props.days)
-      return <div>Loading...</div> //DEV
-
     return (
-      <CalendarPage {...this.props} />
+      <>
+        {
+          this.props.isLoadingDays &&
+          <WrapperPreloader><Preloader size={100} /></WrapperPreloader>
+        }
+
+        <CalendarPage {...this.props} />
+      </>
     )
   }
 }
@@ -28,7 +33,8 @@ const mapStateToProps = (state) => (
   {
     year: state.calendar.year,
     month: state.calendar.month,
-    days: state.calendar.days
+    days: state.calendar.days,
+    isLoadingDays: state.calendar.isLoadingDays
   }
 )
 

@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { ScreenBlackout } from "../../../common/styled";
 import { Circle } from "./../../styled";
 
 const fadeIn = keyframes`
@@ -11,16 +12,10 @@ const fadeIn = keyframes`
   }
 `
 
-export const Blackout = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+export const Blackout = styled(ScreenBlackout)`
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  background-color: rgba(0, 0, 0, 0.3);
   opacity: 0;
   animation: ${fadeIn} 1s forwards;
 `
