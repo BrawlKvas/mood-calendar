@@ -14,8 +14,10 @@ export const SelectCustom = styled.select`
   outline: none;
   padding: 4px;
   font-size: 18px;
+  background-color: initial;
 `
 
 export const OptionCustom = styled.option`
   font-size: 16px;
+  background-color: initial;
 `
