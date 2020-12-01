@@ -10,11 +10,15 @@ export const SelectCustom = styled.select`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: 'none';
+  margin-bottom: 10px;
+  padding: 4px;
   border: none;
   outline: none;
-  padding: 4px;
   font-size: 18px;
+  font-weight: 500;
+  color: #2d3436;
   background-color: initial;
+  cursor: pointer;
 `
 
 export const OptionCustom = styled.option`

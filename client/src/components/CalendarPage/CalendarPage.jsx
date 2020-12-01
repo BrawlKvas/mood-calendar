@@ -3,7 +3,7 @@ import Calendar from './Calendar/Calendar'
 import Statistics from './Statistics/Statistics'
 import { ExitButton, Header, Page } from './styled'
 
-const CalendarPage = ({ days, signOut }) => {
+const CalendarPage =  ({ year, month, days, signOut }) => {
   return (
     <Page>
 
@@ -17,7 +17,7 @@ const CalendarPage = ({ days, signOut }) => {
         <ExitButton onClick={signOut}>+</ExitButton>
       </Header>
 
-      <Calendar />
+      <Calendar year={year} month={month} days={days} />
 
       <Statistics arrayMoods={days} />
     </Page>

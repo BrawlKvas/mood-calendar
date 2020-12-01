@@ -20,6 +20,16 @@ const ChooseMood = ({ year, month, day, moodDay, closeEdit, setMoodDay, сhangin
 
         <Title>{day} {monthName[month - 1]}, {year}</Title>
 
+        <Choice key={-1}>
+          <RadioCircle
+            mood={-1}
+            isPicked={-1 === moodDay && сhangingDaysToMood[day] === undefined}
+            onClick={() => { setMoodDay(year, month, day, -1) }}
+            isFetching={сhangingDaysToMood[day] === -1}
+          />
+          Не выбрано
+        </Choice>
+
         {
           moods.map((item, i) => (
             <Choice key={i}>

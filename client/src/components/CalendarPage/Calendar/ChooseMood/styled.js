@@ -35,7 +35,7 @@ export const Block = styled.div`
   width: 90%;
   height: 70%;
   margin-bottom: -5000px;
-  padding: 40px 35px;
+  padding: 30px 35px;
   border-radius: 10px;
   background-color: #fff;
 
@@ -60,6 +60,6 @@ export const Choice = styled.div`
 `
 
 export const ChoiseCircle = styled(Circle)`
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
 `

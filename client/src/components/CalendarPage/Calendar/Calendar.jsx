@@ -42,12 +42,4 @@ const Calendar = ({ year, month, days, setMoodDay }) => {
   )
 }
 
-const mapStateToProps = (state) => (
-  {
-    year: state.calendar.year,
-    month: state.calendar.month,
-    days: state.calendar.days
-  }
-)
-
-export default connect(mapStateToProps, { setMoodDay })(Calendar) 
+export default connect(null, { setMoodDay })(Calendar) 
