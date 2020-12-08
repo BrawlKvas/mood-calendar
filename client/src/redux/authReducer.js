@@ -37,27 +37,28 @@ export default authReducer
 const setAuthData = (data) => ({ type: SET_AUTH_DATA, data })
 const removeAuthData = () => ({ type: REMOVE_AUTH_DATA })
 
-export const singIn = ({ login, password }, setStatus, setSubmitting) => (dispatch) => {
-  AuthAPI.signIn(login, password)
-    .then(data => {
-      localStorage.setItem(TOKEN_STORAGE_KEY, data.token)
-      dispatch(setAuthData(data))
-    })
-    .catch(err => {
-      setStatus({ error: err.data.message })
-    })
-    .finally(() => setSubmitting(false))
+export const signIn = ({ login, password }) => async (dispatch) => {
+  try {
+    const res = await AuthAPI.signIn(login, password)
+
+    localStorage.setItem(TOKEN_STORAGE_KEY, res.token)
+
+    dispatch(setAuthData(res))
+
+  } catch (error) {
+    throw error.data.message
+  }
 }
 
-export const singUp = ({ login, password }, setStatus, setSubmitting) => (dispatch) => {
-  AuthAPI.signUp(login, password)
-    .then(data => {
-      setStatus({ message: data.message })
-    })
-    .catch(err => {
-      setStatus({ error: err.data.message })
-    })
-    .finally(() => setSubmitting(false))
+export const signUp = ({ login, password }) => async () => {
+  try {
+    const res = await AuthAPI.signUp(login, password)
+
+    return res.message
+
+  } catch (error) {
+    throw error.data.message
+  }
 }
 
 export const signOut = () => (dispatch) => {

@@ -3,18 +3,29 @@ import { Formik } from 'formik'
 import { FormCustom, FormPanel, FieldCustom, ButtonSubmit, FormStatus, ErrorMessageCustom } from './styled'
 import { connect } from 'react-redux'
 
-import { singIn, singUp } from './../../redux/authReducer'
+import { signIn, signUp } from './../../redux/authReducer'
 
 const SIGN_IN = 'SIGN_IN' // Вход
 const SIGN_UP = 'SIGN_UP' // Регистрация
 
-const AuthForm = ({ singIn, singUp }) => {
+const AuthForm = ({ signIn, signUp }) => {
 
-  const submitHandler = (values, { setStatus, setSubmitting }) => {
-    if (values.mode === SIGN_IN) {
-      singIn(values, setStatus, setSubmitting)
-    } else if (values.mode === SIGN_UP) {
-      singUp(values, setStatus, setSubmitting)
+  const submitHandler = async (values, { setStatus, setSubmitting }) => {
+    try {
+      if (values.mode === SIGN_IN) {
+
+        await signIn(values)
+
+      } else if (values.mode === SIGN_UP) {
+
+        const res = await signUp(values)
+        setStatus({ message: res })
+        
+      }
+    } catch (error) {
+      setStatus({ error })
+    } finally {
+      setSubmitting(false)
     }
   }
 
@@ -35,7 +46,7 @@ const AuthForm = ({ singIn, singUp }) => {
       }}
     >
 
-      {({ errors, status, isSubmitting, setFieldValue }) => (
+      {({ status, isSubmitting, setFieldValue }) => (
         <FormCustom>
           <FormPanel error={status && status.error}>
             <FieldCustom type="text" placeholder="Логин" name="login" />
@@ -65,6 +76,6 @@ const AuthForm = ({ singIn, singUp }) => {
 }
 
 export default connect(null, {
-  singIn,
-  singUp
+  signIn,
+  signUp
 })(AuthForm)
